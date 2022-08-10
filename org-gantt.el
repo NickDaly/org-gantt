@@ -496,15 +496,15 @@ If optional USE-END is non-nil use the ...-end values of the timestamp."
            (encode-time 0
                         (or (org-element-property :minute-end timestamp) 0)
                         (or (org-element-property :hour-end timestamp) 0)
-                        (org-element-property :day-end timestamp)
-                        (org-element-property :month-end timestamp)
-                        (org-element-property :year-end timestamp))
+                        (or (org-element-property :day-end timestamp) (nth 6 timestamp))
+                        (or (org-element-property :month-end timestamp) (nth 7 timestamp))
+                        (or (org-element-property :year-end timestamp) (nth 8 timestamp)))
          (encode-time 0
                       (or (org-element-property :minute-start timestamp) 0)
                       (or (org-element-property :hour-start timestamp) 0)
-                      (org-element-property :day-start timestamp)
-                      (org-element-property :month-start timestamp)
-                      (org-element-property :year-start timestamp)))))
+                      (or (org-element-property :day-start timestamp) (nth 3 timestamp))
+                      (or (org-element-property :month-start timestamp) (nth 4 timestamp))
+                      (or (org-element-property :year-start timestamp) (nth 5 timestamp))))))
 
 (defun org-gantt-substring-if (string from to)
   "Return substring if STRING, FROM and TO are non-nil and from < to, otherwise nil."
